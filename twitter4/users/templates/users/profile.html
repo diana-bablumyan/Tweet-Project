@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0px;
+        font-family: "segoe ui";
+    }
+    
+    .nav {
+        height: 50px;
+        width: 100%;
+        background-color: #4d4d4d;
+        position: relative;
+    }
+    
+    .nav>.nav-header {
+        display: inline;
+    }
+    
+    .nav>.nav-header>.nav-title {
+        display: inline-block;
+        font-size: 22px;
+        color: #fff;
+        padding: 10px 10px 10px 10px;
+    }
+    
+    .nav>.nav-btn {
+        display: none;
+    }
+    
+    .nav>.nav-links {
+        display: inline;
+        float: right;
+        font-size: 18px;
+    }
+    
+    .nav>.nav-links>a {
+        display: inline-block;
+        padding: 13px 10px 13px 10px;
+        text-decoration: none;
+        color: #efefef;
+    }
+    
+    .nav>.nav-links>a:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    
+    .nav>#nav-check {
+        display: none;
+    }
+    
+    @media (max-width: 600px) {
+        .nav>.nav-btn {
+            display: inline-block;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+        .nav>.nav-btn>label {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            padding: 13px;
+        }
+        .nav>.nav-btn>label:hover,
+        .nav #nav-check:checked~.nav-btn>label {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .nav>.nav-btn>label>span {
+            display: block;
+            width: 25px;
+            height: 10px;
+            border-top: 2px solid #eee;
+        }
+        .nav>.nav-links {
+            position: absolute;
+            display: block;
+            width: 100%;
+            background-color: #333;
+            height: 0px;
+            transition: all 0.3s ease-in;
+            overflow-y: hidden;
+            top: 50px;
+            left: 0px;
+        }
+        .nav>.nav-links>a {
+            display: block;
+            width: 100%;
+        }
+        .nav>#nav-check:not(:checked)~.nav-links {
+            height: 0px;
+        }
+        .nav>#nav-check:checked~.nav-links {
+            height: calc(100vh - 50px);
+            overflow-y: auto;
+        }
+    }
+</style>
+
+<body style="background: #d7e9f9">
+    <div class="nav">
+        <input type="checkbox" id="nav-check" />
+        <div class="nav-header">
+            <div class="nav-title">
+                <a href="{% url 'home' %}" style="text-decoration: none; color: white">Home
+          </a>
+            </div>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        </div>
+
+        <div class="nav-links">
+            <a href="" target="_blank">{{profile.name}} {{profile.surname}}</a>
+            <a href="{% url 'user_logout'%}">Log Out</a>
+        </div>
+    </div>
+
+    <!-- <img src="{{profile.profile_image.url}}" /> -->
+    <div class="profile-card" style="max-width: 250px; margin-left: 45%; margin-top: 100px">
+        <img style="
+          width: 130px;
+          height: 130px;
+          margin-left: 25px;
+          border-radius: 50%;
+        " src="{{profile.profile_image.url}}" />
+        <div class="card-content" style="color: white">
+            <h3>{{profile.name}} {{profile.surname}}</h3>
+            <h3 style="width: 65px; margin-left: 25%; margin-top: -15px">
+                {{profile.age}} <span>y/o</span>
+            </h3>
+
+            <div class="item-row">
+                <a href="{% url 'update_profile' profile.id %}">
+                    <button class="btn btn-sm btna-success" type="submit" style="
+                width: 70%;
+                background: white;
+                color: #80aed8;
+                border: none;
+                height: 30px;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: 0.4s;
+              ">
+              UPDATE <i class="fas fa-pen"></i>
+            </button></a>
+                <br>
+                <br>
+                <div class="item-row">
+                    <a style="
+                text-decoration: none;
+                color: #80aed8;
+                background: white;
+                border-radius: 25px;
+                padding: 5px 65px;
+            " class="btn btn-sm btn-info" href="{% url 'create' %}">Create</a>
+
+                    <div class="my-twits">
+                        <h3>My tweets</h3>
+                        {% for item in tweet_list %} {% if item.user_id == profile.user_id %}
+                        <div class="item" style="
+                        padding: 25px 15px 35px 15px;
+                        border: 1px solid #fff;
+                    ">
+                            <a style="
+                            text-decoration: none;
+                            color: black;
+                            font-size: 18px;
+                        " href="{% url 'retrieve_tweet' item.id %}"> {{ item }} </a>
+                            <div class="likes-com" style="
+                            margin: 10px 0 10px 0px;
+                        ">
+                                <span style="cursor: pointer"><i class="far fa-heart"></i> 15</span>
+                                <span style="margin-left: 10px; cursor: pointer"><i class="far fa-comment"></i> 3</span>
+                            </div>
+                            <div class="item-row">
+                                <a style="
+                                background: #80aed8;
+                                color: white;
+                                text-decoration: none;
+                                padding: 5px 15px;
+                                border-radius: 15px;
+                            " class="btn btn-sm btn-info" href="{% url 'tweet_update' item.id %}">Update</a>
+                                <a style="
+                                background: red;
+                                color: white;
+                                text-decoration: none;
+                                padding: 5px 15px;
+                                border-radius: 15px;
+                            " class="btn btn-sm btn-danger" href="{% url 'tweet_delete' item.id %}">Delete</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <br> {% endif %} {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

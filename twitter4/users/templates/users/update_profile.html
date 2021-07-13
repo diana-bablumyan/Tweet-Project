@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <style>
+      .form-div form p {
+        font-family: "Roboto";
+      }
+      .form-div form p input {
+        background: transparent;
+        border-top: none;
+        border-left: none;
+        color: white;
+        font-size: 15px;
+        border-right: none;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body
+    style="
+      background: url(https://image.freepik.com/free-vector/white-brick-wall-background_152098-247.jpg)
+        no-repeat;
+      background-size: cover;
+    "
+  >
+    <div
+      style="
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: #e2e2e285;
+        border-radius: 25px;
+      "
+      class="form-div"
+    >
+      <h1 style="font-family: monospace; font-size: 40px">UPDATING ACCOUNT</h1>
+      <form method="post" enctype="multipart/form-data" style="padding: 30px">
+        {% csrf_token %} {{form.as_p}}
+        <button
+          class="btn btn-sm btn-success"
+          type="submit"
+          style="
+            border: none;
+            background: #69ca69;
+            padding: 10px;
+            width: 100%;
+            color: #fff;
+          "
+        >
+          UPDATE
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

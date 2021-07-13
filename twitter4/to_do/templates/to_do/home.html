@@ -1,0 +1,68 @@
+{% extends 'to_do/base.html' %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<body>
+    {% block content %}
+
+    <div class="todo-list">
+        <div style="text-align: center; color: #638cb8">
+            <h1>TWEETS</h1>
+        </div>
+        <class class="item-wrapper">
+            {% for item in tweet_list %}
+            <div class="items" style="
+          padding: 10px;
+          width: 60%;
+          margin: auto;
+    border: 1px solid #eee;
+        ">
+                {% if item.user_id != profile.user_id %}
+                <div style="
+                width: 8%;
+                display: inline-block;
+            ">
+                    <span><img
+                                        src="{{item.user.profile.profile_image.url}}"
+                                        style="width: 50px;height: 50px;"/></span>
+                </div>
+                <div style="
+                width: 35%;
+                display: inline-block;
+            ">
+                    <span style="font-size: 18px">{{ item.user.profile.name }} {{ item.user.profile.surname }}</span>
+                    <span>1s ago</span>
+                </div>
+                <div class="item-content" style="
+                margin-left: 60px;
+            ">
+                    <a style="color: black;" href="{% url 'retrieve_tweet' item.id %}">
+                    {{ item }}
+                </a>
+                </div>
+
+                <div class="likes-com" style="
+                margin-top: 25px;
+            ">
+                    <span style="cursor: pointer">
+                                        <i class="far fa-heart"></i>
+                                        15</span>
+                    <span style="margin-left: 10px; cursor: pointer">
+                                        <i class="far fa-comment"></i>
+                                        3</span >
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        {% endblock content %}
+    </body>
+</html>

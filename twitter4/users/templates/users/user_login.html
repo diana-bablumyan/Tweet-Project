@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log In</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        body {
+            margin: 0;
+            background: url("https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .login-card {
+            color: #69c6e2;
+            font-weight: 100;
+            padding: 40px;
+            width: 50%;
+            height: 65%;
+            border-radius: 2px;
+            overflow: hidden;
+            position: absolute;
+            top: 22%;
+            right: 0;
+        }
+        
+        .login-card form .item-row h3 {
+            display: none;
+        }
+        
+        .login-card form .item-row button {
+            width: 100%;
+            height: 35px;
+            border: none;
+            background: white;
+            color: #69c6e2;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        
+        .login-card form .item-row button:hover {
+            box-shadow: 5px 5px 6px #086d8c;
+        }
+        
+        .login-card h1 {
+            font-weight: 100;
+            text-align: center;
+            font-size: 2.3em;
+        }
+        
+        .login-card input {
+            outline: none;
+        }
+        
+        .login-card input[type="submit"] {
+            width: 100%;
+            display: block;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .login-card input[type="text"],
+        input[type="password"] {
+            height: 44px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 10px;
+            -webkit-appearance: none;
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            border-top: 1px solid #c0c0c0;
+            /* border-radius: 2px; */
+            padding: 0 8px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+        
+        .login-card input[type="text"]:hover,
+        input[type="password"]:hover {
+            border: 1px solid #b9b9b9;
+            border-top: 1px solid #a0a0a0;
+            -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login {
+            text-align: center;
+            font-size: 14px;
+            font-family: "Arial", sans-serif;
+            font-weight: 700;
+            height: 36px;
+            padding: 0 8px;
+            /* border-radius: 3px; */
+            /* -webkit-user-select: none; user-select:
+none; */
+        }
+        
+        .login-submit {
+            /* border: 1px solid #3079ed; */
+            border: 0;
+            color: #fff;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+            background-color: #69c6e2;
+            /*
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe),
+to(#4787ed)); */
+        }
+        
+        .login-submit:hover {
+            /* border: 1px solid #2f5bb7; */
+            border: 0;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+            background-color: #357ae8;
+            /* background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe),
+to(#357ae8)); */
+        }
+        
+        .login-card a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 400;
+            text-align: center;
+            display: inline-block;
+            opacity: 0.6;
+            transition: opacity ease 0.5s;
+        }
+        
+        .login-card a:hover {
+            opacity: 1;
+        }
+        
+        .login-help {
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left-side" style="
+    width: 45%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+">
+        <img style="
+        width: 100%;
+        height: 100%;
+    " src="https://abs.twimg.com/sticky/illustrations/lohp_1302x955.png">
+        <div class="logo" style="
+        position: absolute;
+        top: 27%;
+        width: 400px;
+        height: 400px;
+        left: 5%;
+    ">
+            <img style="
+            width: 100%;
+            height: 100%;
+        " src="https://icon-library.com/images/twitter-icon-svg/twitter-icon-svg-28.jpg">
+        </div>
+    </div>
+    <div class="login-card">
+        <h1>Log-in</h1>
+
+        <form method="post">
+        <br/>
+                {% csrf_token %}
+
+            {{ form}}
+
+        <div class="item-row">
+            <button class="btn btn-sm btn-success" type="submit">Sign up</button>
+        </div>
+
+            <div class="reg-but" style="text-align: center;">
+                <a style="color: #69c6e2;" href="{% url 'register' %}">Register</a>
+            </div>
+        </form>
+    </div>
+    <!-- <div class="login-help">#} {# <a href="{% url 'register' %}">Register</a> •
+        <a href="#">Forgot Password</a>#} {# </div>#} <form method="post"> <div
+        class="item-row"> <h3>Login here</h3> {% csrf_token %} {{ form}} </div> <div
+        class="item-row" style="text-align: center; margin-bottom: 15px;"> <button
+        class="btn btn-sm btn-success" type="submit" style="margin-bottom: 15px;">Sign
+        up</button> <a style="color: white;" href="{% url 'register' %}">Register</a>
+        </div> </form> </div> -->
+</body>
+
+</html>

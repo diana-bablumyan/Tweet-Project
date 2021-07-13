@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log In</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        body {
+            margin: 0;
+            background: url("https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .register-card {
+            color: #69c6e2;
+            font-weight: 100;
+            padding: 40px;
+            width: 50%;
+            height: 75%;
+            border-radius: 2px;
+            overflow: hidden;
+            position: absolute;
+            top: 7%;
+            right: 0;
+        }
+        
+        .register-card form .item-row h3 {
+            display: none;
+        }
+        
+        .register-card form .item-row button {
+            width: 100%;
+            height: 35px;
+            border: none;
+            background: #69c6e2;
+            color: white;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        
+        .register-card form .item-row button:hover {
+            background-color: #357ae8;
+        }
+        
+        .register-card h1 {
+            font-weight: 100;
+            text-align: center;
+            font-size: 2.3em;
+        }
+        
+        .register-card input {
+            outline: none;
+        }
+        
+        .register-card input[type="submit"] {
+            width: 100%;
+            display: block;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .register-card input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            height: 44px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 10px;
+            -webkit-appearance: none;
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            border-top: 1px solid #c0c0c0;
+            /* border-radius: 2px; */
+            padding: 0 8px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+        
+        .register-card input[type="text"]:hover,
+        input[type="password"]:hover,
+        input[type="email"]:hover {
+            border: 1px solid #b9b9b9;
+            border-top: 1px solid #a0a0a0;
+            -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register {
+            text-align: center;
+            font-size: 14px;
+            font-family: "Arial", sans-serif;
+            font-weight: 700;
+            height: 36px;
+            padding: 0 8px;
+        }
+        
+        .register-submit {
+            border: 0;
+            color: #fff;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+            background-color: #4d90fe;
+        }
+        
+        .register-submit:hover {
+            border: 0;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+            background-color: #357ae8;
+        }
+        
+        .register-card a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 400;
+            text-align: center;
+            display: inline-block;
+            opacity: 0.6;
+            transition: opacity ease 0.5s;
+        }
+        
+        .register-card a:hover {
+            opacity: 1;
+        }
+        
+        .register-help {
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .register-card li,
+        .register-card span {
+            font-size: 12px;
+            list-style-type: none;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <div class="register-card"> <h1>Register</h1><br /> <form> <input
+        type="text" name="user" placeholder="Username" /> <input type="email"
+        name="e-mail" placeholder="E-Mail" /> <input type="password" name="pass"
+        placeholder="Password" /> <input type="password" name="pass-reset"
+        placeholder="Reset Password"/> <input type="submit" name="register"
+        class="register register-submit" value="register" /> </form> <div
+        class="register-help">• <a href="{% url 'user_login' %}">Log In</a> •</div>
+        </div> -->
+    <div class="left-side" style="
+    width: 45%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+">
+        <img style="
+        width: 100%;
+        height: 100%;
+    " src="https://abs.twimg.com/sticky/illustrations/lohp_1302x955.png">
+        <div class="logo" style="
+        position: absolute;
+        top: 27%;
+        width: 400px;
+        height: 400px;
+        left: 5%;
+    ">
+            <img style="
+            width: 100%;
+            height: 100%;
+        " src="https://icon-library.com/images/twitter-icon-svg/twitter-icon-svg-28.jpg">
+        </div>
+    </div>
+    <div class="register-card item-row">
+        <h1>Register</h1>
+
+        <form method="post">
+
+            {% csrf_token %} {{ form }}
+            <br>
+
+            <div class="item-row" style="text-align: center; margin-bottom: 15px;">
+                <button class="btn btn-sm btn-success" type="submit" style="margin-bottom: 15px;">Sign up</button>
+                <a style="color: #69c6e2;" href="{% url 'user_login' %}">Log In</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</html>

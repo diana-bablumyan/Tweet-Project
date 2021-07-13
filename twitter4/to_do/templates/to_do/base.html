@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tweeter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <style>
+        h3 {
+            color: #374d65;
+        }
+        
+        body {
+            background-color: #4396af;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        
+        input::placeholder {
+            color: #d3d3d3;
+        }
+        
+        .submit {
+            background-color: #6ba3e8;
+        }
+        
+        .center-column {
+            padding: 40px;
+            background-color: #fff;
+        }
+        
+        .item-row {
+            background-color: #4396af;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 3px;
+            font-size: 16px;
+            box-shadow: 0px -1px 10px -4px rgba(0, 0, 0, 0.75);
+        }
+        
+        .item-row input,
+        textarea {
+            color: black;
+        }
+        
+        .btn-danger {
+            background-color: #ffae19;
+            border-color: #e59400;
+        }
+        
+        a {
+            color: white;
+        }
+        
+        a:hover {
+            color: white;
+        }
+        
+        #sign_up {
+            color: #337ab7;
+        }
+        
+        .navbar {
+            position: relative;
+            min-height: 50px;
+            margin-bottom: 0px;
+            border: 1px solid transparent;
+        }
+        
+        .wrapper .content-wrap form input {
+            outline: none;
+        }
+        
+        .wrapper .content-wrap form input[type="search"] {
+            -webkit-appearance: textfield;
+            -webkit-box-sizing: content-box;
+            font-family: inherit;
+            font-size: 100%;
+        }
+        
+        .wrapper .content-wrap form input[type="search"] {
+            width: 15px;
+            padding-left: 10px;
+            color: transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 50%;
+            border: none;
+            background: #eee;
+        }
+        
+        .wrapper .content-wrap form input[type="search"]:hover {
+            background-color: #69c6e2a1;
+        }
+        
+        .wrapper .content-wrap form input[type="search"]:focus {
+            width: 130px;
+            padding-left: 32px;
+            color: #000;
+            background-color: #69c6e2a1;
+            cursor: auto;
+            border-radius: 15px;
+        }
+        
+        .wrapper .content-wrap form input:-moz-placeholder {
+            color: transparent;
+        }
+        
+        .wrapper .content-wrap form input::-webkit-input-placeholder {
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header"></div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                <li class="active"><a href="{% url 'send_user_email' %}">Contact Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if not request.user.is_authenticated %}
+                <li>
+                    <a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a
+            >
+          </li>
+          <li>
+            <a href="{% url 'user_login' %}"
+              ><span class="glyphicon glyphicon-log-in"></span> Login</a
+            >
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'profile' request.user.id %}"
+              ><span class="glyphicon glyphicon-user"></span> Profile</a
+            >
+          </li>
+          <li>
+            <a href="{% url 'user_logout' %}"
+              ><span class="glyphicon glyphicon-log-in"></span> Logout</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    
+
+    <div class="center-column">
+      <div class="wrapper">
+        <div class="col-md-12 content-wrap">
+          <form
+            method="post"
+            action="{% url 'search' %}"
+            id="search"
+            style="margin-left: 17px"
+          >
+            {% csrf_token %}
+            <input
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              name="searched"
+            />
+  
+            <button
+              type="submit"
+              style="
+                background: transparent;
+                color: #69c6e2;
+                border: none;
+                font-size: 18px;
+              "
+            >
+              Search <i class="fas fa-search"></i>
+            </button>
+          </form>
+          {% if messages %} {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+      {% block content %} {% endblock content %}
+    </div>
+  </body>
+</html>
